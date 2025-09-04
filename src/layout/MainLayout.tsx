@@ -8,12 +8,10 @@ function MainLayout() {
 
     return (
         <div className="flex flex-col min-h-screen">
-            {/* Navbar */}
             <Navbar isOpen={isOpen} setIsOpen={setIsOpen} />
 
             <div className="flex flex-1 relative">
-                                   
-                {/* Overlay solo para cerrar sidebar */}
+
                 {isOpen && (
                     <div
                         onClick={() => setIsOpen(false)}
@@ -21,16 +19,10 @@ function MainLayout() {
                     ></div>
                 )}
 
-                {/* Sidebar */}
                 <div
-                    className={`fixed top-0 left-0 h-full w-64 bg-gray-200 shadow-lg p-6 transform transition-transform duration-300 ease-in-out z-40 ${isOpen ? "translate-x-0" : "-translate-x-full"
+                    className={`fixed top-16 left-0 h-[calc(100%-4rem)] w-64 bg-gray-200 shadow-lg p-6 transform transition-transform duration-300 ease-in-out z-40 ${isOpen ? "translate-x-0" : "-translate-x-full"
                         }`}
-                >   
-
-                        <br />
-                        <br />
-                        <br />
-
+                >
                     <h2 className="text-lg font-bold mb-6 text-indigo-600">Ver</h2>
                     <ul className="space-y-4 text-gray-700">
                         <li><a href="#" className="hover:text-indigo-600">Categorías</a></li>
@@ -41,9 +33,8 @@ function MainLayout() {
                     </ul>
                 </div>
 
-                {/* Contenido principal con filtros */}
                 <div
-                    className={`flex-1 transition-all duration-300 ease-in-out relative ${isOpen ? "filter grayscale " : ""
+                    className={`flex-1 transition-all duration-300 ease-in-out relative ${isOpen ? "filter blur-smf " : ""
                         }`}
                 >
                     <Outlet />

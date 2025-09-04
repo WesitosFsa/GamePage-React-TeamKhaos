@@ -11,7 +11,6 @@ function Navbar({ isOpen, setIsOpen }: NavbarProps) {
         <div className="max-w mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
-              {/* Hamburger menu button to open sidebar */}
               <button
                 id="menu-btn"
                 className="bg-white text-indigo-600 font-bold py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors"
@@ -32,7 +31,6 @@ function Navbar({ isOpen, setIsOpen }: NavbarProps) {
                 </svg>
               </button>
 
-              {/* Logo and text */}
               <a
                 href="#"
                 className="hover:text-gray-200 flex items-center space-x-2 ml-4"

@@ -43,7 +43,7 @@ function MainLayout() {
 
                 {/* Contenido principal con filtros */}
                 <div
-                    className={`flex-1 transition-all duration-300 ease-in-out relative ${isOpen ? "filter grayscale " : ""
+                    className={`flex-1 transition-all duration-300 ease-in-out relative ${isOpen ? "filter grayscale blur-sm" : ""
                         }`}
                 >
                     <Outlet />

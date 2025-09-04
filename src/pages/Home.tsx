@@ -1,39 +1,85 @@
-function Home() {
+import { useState } from 'react';
+
+const Home = () => {
+  const images = [
+    "https://placehold.co/1200x600/FF5733/FFFFFF?text=Imagen+1",
+    "https://placehold.co/1200x600/33FF57/FFFFFF?text=Imagen+2",
+    "https://placehold.co/1200x600/5733FF/FFFFFF?text=Imagen+3",
+    "https://placehold.co/1200x600/FFBD33/000000?text=Imagen+4",
+  ];
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % images.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + images.length) % images.length);
+  };
+
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10">
-      <h1 className="text-3xl font-bold text-indigo-600 mb-6">
-        Bienvenido a Team Khaos 
-      </h1>
-
-      <p className="text-gray-700 mb-6">
-        Esta es la página de inicio. Aquí podrás explorar juegos nuevos,
-        ver los más populares y subir tus propias creaciones.
-      </p>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div className="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transition">
-          <h2 className="text-xl font-semibold text-indigo-500">Juego 1</h2>
-          <p className="text-gray-600 mt-2">
-            Descripción breve del juego 1.
-          </p>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 font-sans p-4">
+      <div className="relative w-full max-w-4xl mx-auto rounded-xl overflow-hidden shadow-2xl">
+        <div className="relative h-56 md:h-96">
+          {images.map((imgSrc, index) => (
+            <div
+              key={index}
+              className={`duration-700 ease-in-out absolute inset-0 transition-opacity ${
+                index === currentSlide ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              <img
+                src={imgSrc}
+                className="absolute block w-full h-full object-cover"
+                alt={`Slide ${index + 1}`}
+              />
+            </div>
+          ))}
         </div>
 
-        <div className="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transition">
-          <h2 className="text-xl font-semibold text-indigo-500">Juego 2</h2>
-          <p className="text-gray-600 mt-2">
-            Descripción breve del juego 2.
-          </p>
+        <div className="absolute z-30 flex -translate-x-1/2 space-x-3 rtl:space-x-reverse bottom-5 left-1/2">
+          {images.map((_, index) => (
+            <button
+              key={index}
+              type="button"
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                index === currentSlide ? 'bg-white' : 'bg-gray-400'
+              }`}
+              aria-current={index === currentSlide ? 'true' : 'false'}
+              aria-label={`Slide ${index + 1}`}
+              onClick={() => setCurrentSlide(index)}
+            ></button>
+          ))}
         </div>
 
-        <div className="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transition">
-          <h2 className="text-xl font-semibold text-indigo-500">Juego 3</h2>
-          <p className="text-gray-600 mt-2">
-            Descripción breve del juego 3.
-          </p>
-        </div>
+        <button
+          type="button"
+          onClick={prevSlide}
+          className="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 group focus:outline-none"
+        >
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 hover:bg-white/50 dark:bg-gray-800/30 dark:hover:bg-gray-800/60 transition-colors">
+            <svg className="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 1 1 5l4 4"/>
+            </svg>
+            <span className="sr-only">Previous</span>
+          </span>
+        </button>
+
+        <button
+          type="button"
+          onClick={nextSlide}
+          className="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 group focus:outline-none"
+        >
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 hover:bg-white/50 dark:bg-gray-800/30 dark:hover:bg-gray-800/60 transition-colors">
+            <svg className="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4"/>
+            </svg>
+          </span>
+        </button>
       </div>
     </div>
   );
-}
+};
 
 export default Home;
